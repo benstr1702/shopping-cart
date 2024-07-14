@@ -39,3 +39,337 @@ function orderPurchasedItems(ar) {
 like 2 small red sets, 3 medium green combination
 
 
+There are many ways to issue the project. This is only one of them.
+
+1. We create class for the stocks:
+
+class Stock {
+
+}
+
+2. When we create object of a class  in the way like
+
+const firstStock = new Stock()
+
+we run the "constructor" function of the class,
+
+so we need constructor:
+
+class Stock {
+    constructor() {
+
+    }
+}
+
+3. The constructor() function could get some initial values as arguments.
+
+For example, stock needs an HTML element and a list of the classes
+
+of the icons.
+
+When we create a class, it's a template - it's  not a specific objects, so 
+
+for now we just invent the parts that we possible will need.
+
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+    }
+}
+
+4. When the constructor will run, it'll initializate the object's properties with
+
+the values it gets:
+
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+        this.htmlEl = htmlEl;
+        this.iconClassList = iconClassList;
+
+    }
+}
+
+5. Now we can create the object of this class for the stock 
+
+of the customer icons:
+
+const avatarStockEl = document.querySelector(`.customer-avatars .stock`);
+
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+        this.htmlEl = htmlEl;
+        this.iconClassList = iconClassList;
+
+    }
+}
+
+const avatarStock = new Stock(avatarStockEl, avatarIconNames);
+
+6. But it still does not show the avatars, so we'll create a class 
+
+for the icons:
+
+class Avatar {
+    constructor() {
+
+    }
+}
+
+7. Icon needs an HTML element and the classes of it's picture.
+
+class Avatar {
+    constructor(htmlEl, iconClasses) {
+        this.htmlEl = htmlEl;
+        this.htmlEl.className = iconClasses;
+    }
+}
+
+8. Now we can use this class while creating the Stock, for this 
+
+we create a function inside the class Stock - METHOD.
+
+This function will go over the list of icon classes,
+
+and will return new Avatars - this way we'll create new property
+
+of the class Stock: this.stock 
+
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+        this.htmlEl = htmlEl;
+        this.iconClassList = iconClassList;
+
+    }
+
+    creStock() {
+        this.stock = this.iconClassList.map(iconClasses => {
+
+            
+
+        })
+    }
+}
+
+9. So here inside map() we create HTML element for an icon,
+
+append the icon to the HTML element of the Stock,
+
+pass this icon element and the classes for it to the constructor
+
+of the Avatar class, and thus we create new Avatar fro each:
+
+creStock() {
+        this.stock = this.iconClassList.map(iconClasses => {
+
+           const newIcon = document.createElement('i');
+           this.htmlEl.append(newIcon);
+           return new Avatar(newIcon, iconClasses); 
+
+        })
+    }
+
+10. Now we'll use creStock() function in the constructor and 
+
+it will create the property this.stock and also will show the icons,
+
+as now all their elements are created, got their classes and
+
+appended to the HTML:
+
+/******* CLASSES OF STOCKS *******/
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+        this.htmlEl = htmlEl;
+        this.iconClassList = iconClassList;
+        this.creStock();
+
+    }
+
+    creStock() {
+        this.stock = this.iconClassList.map(iconClasses => {
+
+           const newIcon = document.createElement('i');
+           this.htmlEl.append(newIcon);
+           return new Avatar(newIcon, iconClasses); 
+
+        })
+    }
+}
+
+11. This is the whole script for now:
+
+/******* HTML Elements for the Stocks *******/
+const avatarStockEl = document.querySelector(`.customer-avatars .stock`);
+const cartStockEl = document.querySelector(`.carts .stock`);
+const productShelvesEl = document.querySelector(`.products .stock`);
+const customerStockEl = document.querySelector(`.customers .stock`);
+
+/******* CREATING CUSTOMER *******/
+const btnCreateCustomer = document.querySelector(`.create-customer button`);
+const formAddCustomer = document.querySelector(`form.add-customer`);
+const inpName = document.querySelector('#inpName');
+
+const chosenAvatarIconParent = document.querySelector('.chosen-customer-avatar');
+const chosenAvatarFirstIcon = document.querySelector('.chosen-customer-avatar i');
+const chosenCartIconParent = document.querySelector('.chosen-shopping-cart');
+const chosenCartFirstIcon = document.querySelector('.chosen-shopping-cart i');
+
+/******* CUSTOMERS and PURCHASES *******/
+const shoppingCartDiv = document.querySelector('.shopping-cart .stock');
+
+/******* We'll need these lists of the objects *******/
+const stocks = [], customers = [];
+
+/******* CLASSES OF STOCKS *******/
+class Stock {
+    constructor(htmlEl, iconClassList) {
+
+        this.htmlEl = htmlEl;
+        this.iconClassList = iconClassList;
+        this.creStock();
+
+    }
+
+    creStock() {
+        this.stock = this.iconClassList.map(iconClasses => {
+
+           const newIcon = document.createElement('i');
+           this.htmlEl.append(newIcon);
+           return new Avatar(newIcon, iconClasses); 
+
+        })
+    }
+}
+
+/******* CLASSES OF THE ITEMS IN THE STOCKS *******/
+
+class Avatar {
+    constructor(htmlEl, iconClasses) {
+        this.htmlEl = htmlEl;
+        this.htmlEl.className = iconClasses;
+    }
+}
+
+/******* CREATING THE STOCKS *******/
+const avatarStock = new Stock(avatarStockEl, avatarIconNames);
+
+12. The icons are seen, but they are too much stuffed, so we'll 
+
+use Bootstrap class "p-2" when the icons have already got 
+
+their classes:
+
+class Avatar {
+    constructor(htmlEl, iconClasses) {
+        this.htmlEl = htmlEl;
+        this.htmlEl.className = iconClasses;
+        this.htmlEl.classList.add("p-2");
+    }
+}
+
+13. The icons should be colored randomly, so we create a function
+
+randomColor() for this:
+
+const getRandColor = () => {
+    const getRand0To255 = () => Math.floor(Math.random()*256);
+    return `rgb(${getRand0To255()},${getRand0To255()},${getRand0To255()})`;
+}
+
+14. We use this function in the constructor of Avatar to make
+
+the html elements of the icons use the random color:
+
+class Avatar {
+    constructor(htmlEl, iconClasses) {
+        this.htmlEl = htmlEl;
+        this.htmlEl.className = iconClasses;
+        this.htmlEl.classList.add("p-2");
+        this.htmlEl.style.color = getRandColor();
+    }
+}
+
+Now they are colored and have spaces between them.
+
+15. To see the icons of the shopping carts in addition to the stock 
+
+of the customer avatars we'll create the stock of the shopping cart
+
+pictures. For this we'll need the name of it's HTML element
+
+and the list of the icon classes for the shopping carts:
+
+/******* CREATING THE STOCKS *******/
+const avatarStock = new Stock(avatarStockEl, avatarIconNames);
+const cartStock = new Stock(cartStockEl, cartIconNames);
+
+16. They are nice but they are listed in the same order always.
+
+There are different ways to accomplish the shuffle, let's do it 
+
+in a logic way.
+
+So, in the function creStock that creates the stock of the Avatars
+
+before doing this, we create an array filled with the indexes of the
+
+icon elements - just in accordance with the size of the icon classes
+
+array:
+
+    creStock() {
+
+        const forShuffle = [];
+        for (let i=0; i < this.iconClassList.length; i++) {
+            forShuffle.push(i);
+        }
+
+        this.stock = this.iconClassList.map(iconClasses => {
+
+           const newIcon = document.createElement('i');
+           this.htmlEl.append(newIcon);
+           return new Avatar(newIcon, iconClasses); 
+
+        })
+    }
+
+17. Inside the loop over the icons we'll get each time some random index
+
+for the array "forShuffle", use the number from it, and cut this number off
+
+after that to leave only the numbers that we still haven't use:
+
+    creStock() {
+
+        const forShuffle = [];
+        for (let i=0; i < this.iconClassList.length; i++) {
+            forShuffle.push(i);
+        }
+
+        this.stock = this.iconClassList.map(iconClasses => {
+
+           const newIcon = document.createElement('i');
+           this.htmlEl.append(newIcon);
+
+           let idx = Math.floor(Math.random() * forShuffle.length);
+           newIcon.style.order = forShuffle.splice(idx,1);
+
+           return new Avatar(newIcon, iconClasses); 
+
+        })
+    }
+
+After this we see the both stocks changing the order after each browser "refresh".
+
+18. Now we could extend the class Stock to be the class productStock
+
+or create it anew - new productStockClass - for the Products.
+
+I suggest to create one new.
+
+Also we need Product class - for each product.
+
