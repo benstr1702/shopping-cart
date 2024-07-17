@@ -34,8 +34,8 @@ const productData = [
 	{
 		name: "small combination",
 		color: "dodgerblue",
-		price: "9.99shekel",
-		icon: "fa-solid fa-sack-dollar",
+		price: "9.99₪",
+		icon: "fa-solid fa-dollar-sign",
 		isSale: true,
 		contains: [
 			{ what: "apple", icon: "fa-apple-whole", color: "green" },
@@ -46,8 +46,8 @@ const productData = [
 	{
 		name: "small set",
 		color: "red",
-		price: "39.99shekel",
-		icon: "fa-solid fa-sack-dollar",
+		price: "39.99₪",
+		icon: "fa-solid fa-dollar-sign",
 		stars: 2,
 		contains: [
 			{ what: "wine", icon: "fa-wine-bottle", color: "red" },
@@ -58,8 +58,8 @@ const productData = [
 	{
 		name: "small set",
 		color: "green",
-		price: "14.99shekel",
-		icon: "fa-solid fa-sack-dollar",
+		price: "14.99₪",
+		icon: "fa-solid fa-dollar-sign",
 		isSale: true,
 		stars: 4,
 		contains: [
@@ -71,8 +71,8 @@ const productData = [
 	{
 		name: "small set",
 		color: "green",
-		price: "20.99shekel",
-		icon: "fa-solid fa-sack-dollar",
+		price: "20.99₪",
+		icon: "fa-solid fa-dollar-sign",
 		stars: 5,
 		contains: [
 			{ what: "green", icon: "fa-seedling", color: "green" },
@@ -83,7 +83,7 @@ const productData = [
 	{
 		name: "medium combination",
 		color: "greenyellow",
-		price: "59.99shekel",
+		price: "59.99₪",
 		icon: "fa-solid fa-gift",
 		contains: [
 			[
@@ -101,7 +101,7 @@ const productData = [
 	{
 		name: "medium set",
 		color: "red",
-		price: "109.99shekel",
+		price: "109.99₪",
 		icon: "fa-solid fa-gift",
 		contains: [
 			[
@@ -123,7 +123,7 @@ const productData = [
 	{
 		name: "large combination",
 		color: "purple",
-		price: "209.99shekel",
+		price: "209.99₪",
 		icon: "fa-solid fa-boxes-packing",
 		contains: [
 			[

@@ -123,7 +123,7 @@ class Product {
 		this.icon = productData.icon;
 		this.isSale = productData.isSale || false;
 		this.stars = productData.stars || 0;
-		this.contains = productData.contains;
+		this.contains = productData.contains || [];
 	}
 }
 
@@ -158,6 +158,28 @@ class ProductStock {
 		const priceElement = document.createElement("p");
 		priceElement.textContent = product.price;
 
+		const contentsElement = document.createElement("div");
+		contentsElement.classList.add("product-contents");
+
+		product.contains.forEach((contentGroup) => {
+			const groupElement = document.createElement("div");
+			groupElement.classList.add("content-group");
+
+			if (Array.isArray(contentGroup)) {
+				contentGroup.forEach((content) => {
+					const itemElement = this.createContentItem(content);
+					groupElement.appendChild(itemElement);
+				});
+			} else {
+				const itemElement = this.createContentItem(contentGroup);
+				groupElement.appendChild(itemElement);
+			}
+
+			contentsElement.appendChild(groupElement);
+		});
+
+		productElement.appendChild(contentsElement);
+
 		productElement.appendChild(iconElement);
 		productElement.appendChild(nameElement);
 		productElement.appendChild(priceElement);
@@ -181,7 +203,25 @@ class ProductStock {
 			productElement.appendChild(starsElement);
 		}
 
+		// productElement.appendChild(productItems);
+
 		return productElement;
+	}
+	createContentItem(content) {
+		const itemElement = document.createElement("div");
+		itemElement.classList.add("content-item");
+
+		const iconElement = document.createElement("i");
+		iconElement.className = content.icon;
+		iconElement.style.color = content.color;
+
+		const textElement = document.createElement("span");
+		textElement.textContent = content.what;
+
+		itemElement.appendChild(iconElement);
+		itemElement.appendChild(textElement);
+
+		return itemElement;
 	}
 }
 
