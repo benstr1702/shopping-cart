@@ -27,7 +27,7 @@ body {
 
 #icon-stock-section i.active,
 #cart-stock-section i.active {
-    border: 2px solid rgba(5, 80, 9, 0.877); /* Change the border color and width as needed */
+    border:1px  ridge black;
     border-radius: 4px; /* Optional: add border-radius for rounded corners */
 }
 
@@ -60,12 +60,17 @@ body {
     text-align: center;
 }
 
+h2{
+    color : #43c0ad;
+}
+
 .stock-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 1rem;
+    box-shadow: 10px 5px 5px black;
     width: 300px;
     height: 300px;
     border: 1px solid black;
@@ -73,6 +78,11 @@ body {
     overflow-y: auto;
 }
 
+h1{
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+}
 .icon-container {
     display: flex;
     flex-wrap: wrap;
@@ -91,7 +101,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;    
-    border: 1px solid yellow;
+    border: 1px dotted rgb(255, 0, 191);
 }
 
 .user-cart{ 
@@ -101,7 +111,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;    
-    border: 1px solid yellow;
+    border: 1px dotted rgb(255, 0, 191);
 
 }
 .user-container{
@@ -110,4 +120,12 @@ body {
     align-items: center;
     gap: 2rem;
     flex-direction: row;
+}
+
+
+
+.products-container{
+    width: 800px;
+    height: 650px;
+    border: solid 1px black;
 }
