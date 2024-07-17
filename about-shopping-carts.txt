@@ -37,14 +37,14 @@ function orderPurchasedItems(ar) {
 
 - If not doing recursion, just put the "set"s on the "shelves",
 like 2 small red sets, 3 medium green combination
-
+-------------------------------------------------------------------------------------------
 
 There are many ways to issue the project. This is only one of them.
 
 1. We create class for the stocks:
 
 class Stock {
-
+    
 }
 
 2. When we create object of a class  in the way like

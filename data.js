@@ -50,9 +50,9 @@ const productData = [
 		icon: "fa-solid fa-dollar-sign",
 		stars: 2,
 		contains: [
-			{ what: "wine", icon: "fa-wine-bottle", color: "red" },
-			{ what: "apple", icon: "fa-apple-whole", color: "red" },
-			{ what: "hot-pepper", icon: "fa-pepper-hot", color: "red" },
+			{ what: "wine", icon: "fa-solid fa-wine-bottle", color: "red" },
+			{ what: "apple", icon: "fa-solid fa-apple-whole", color: "red" },
+			{ what: "hot-pepper", icon: "fa-solid fa-pepper-hot", color: "red" },
 		],
 	},
 	{
