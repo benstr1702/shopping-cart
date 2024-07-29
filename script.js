@@ -6,7 +6,7 @@ const avatarDisplayBox = document.querySelector(".user-icon");
 const cartDisplayBox = document.querySelector(".user-cart");
 const cartStockElement = document.getElementById("cart-stock-section");
 const userNameInput = document.querySelector("#user-name");
-//Choose random color function
+const productCart = document.querySelector("#product-cart");
 function chooseRandomColor() {
 	let random = Math.floor(Math.random() * 256);
 	return random;
@@ -17,27 +17,27 @@ class Avatar {
 		this.htmlElement = htmlElement;
 		this.stock = stock;
 		this.htmlElement.className = iconClasses;
-		// console.log(this.htmlElement, " htmlElement");
-		this.htmlElement.addEventListener("click", this.toggleActive.bind(this));
+		this.htmlElement.addEventListener(
+			"click",
+			this.toggleActive.bind(this)
+		);
 	}
 	toggleActive() {
-		const isCartSection = this.stock.htmlElement.id === "cart-stock-section";
+		const isCartSection =
+			this.stock.htmlElement.id === "cart-stock-section";
 		const displayBox = isCartSection ? cartDisplayBox : avatarDisplayBox;
 
 		if (!this.htmlElement.classList.contains("active")) {
 			this.stock.deselectAll();
 			this.htmlElement.classList.add("active");
 
-			// Clear the appropriate display box
 			displayBox.innerHTML = "";
 
-			// Clone the icon and append it to the appropriate display box
 			const clonedIcon = this.htmlElement.cloneNode(true);
 			displayBox.appendChild(clonedIcon);
 		} else {
 			this.htmlElement.classList.remove("active");
 
-			// Clear the appropriate display box when deselecting
 			displayBox.innerHTML = "";
 		}
 	}
@@ -46,7 +46,6 @@ class Avatar {
 //Stock Class
 class Stock {
 	constructor(htmlElement, iconClassList) {
-		// this.items = [];
 		this.htmlElement = htmlElement;
 		this.iconClassList = iconClassList;
 		this.stock = [];
@@ -62,15 +61,12 @@ class Stock {
 				shuffledIconClassList[i],
 			];
 		}
-		// console.log("Shuffled icon classes:", shuffledIconClassList);
-
 		this.stock = shuffledIconClassList.map((iconClasses) => {
 			const newIcon = document.createElement("i");
 			newIcon.style.color = `rgb(${chooseRandomColor()} , ${chooseRandomColor()} , ${chooseRandomColor()})`;
 			newIcon.style.padding = "5px";
 			newIcon.style.textAlign = "center";
 			this.htmlElement.appendChild(newIcon);
-			// console.log(new Avatar(newIcon, iconClasses));
 			return new Avatar(newIcon, iconClasses, this);
 		});
 	}
@@ -161,6 +157,15 @@ class ProductStock {
 		const contentsElement = document.createElement("div");
 		contentsElement.classList.add("product-contents");
 
+		const addToCartBtn = document.createElement("button");
+
+		addToCartBtn.classList.add("add-to-cart");
+		addToCartBtn.textContent = "Add To Cart";
+
+		addToCartBtn.addEventListener("click", () =>
+			this.addToCart(productElement)
+		);
+
 		product.contains.forEach((contentGroup) => {
 			const groupElement = document.createElement("div");
 			groupElement.classList.add("content-group");
@@ -183,8 +188,8 @@ class ProductStock {
 		productElement.appendChild(iconElement);
 		productElement.appendChild(nameElement);
 		productElement.appendChild(priceElement);
+		productElement.appendChild(addToCartBtn);
 
-		// Add more details like stars, sale status, and contained items if needed
 		if (product.isSale) {
 			const saleElement = document.createElement("span");
 			saleElement.textContent = "Sale";
@@ -203,8 +208,6 @@ class ProductStock {
 			productElement.appendChild(starsElement);
 		}
 
-		// productElement.appendChild(productItems);
-
 		return productElement;
 	}
 	createContentItem(content) {
@@ -222,6 +225,25 @@ class ProductStock {
 		itemElement.appendChild(textElement);
 
 		return itemElement;
+	}
+
+	addToCart(productElement) {
+		const clonedProduct = productElement.cloneNode(true);
+
+		const addToCartBtn = clonedProduct.querySelector(".add-to-cart");
+		if (addToCartBtn) {
+			addToCartBtn.remove();
+		}
+
+		const removeFromCartBtn = document.createElement("button");
+		removeFromCartBtn.textContent = "Remove";
+		removeFromCartBtn.classList.add("remove-button");
+		removeFromCartBtn.addEventListener("click", () => {
+			clonedProduct.remove();
+		});
+		clonedProduct.appendChild(removeFromCartBtn);
+
+		productCart.appendChild(clonedProduct);
 	}
 }
 
